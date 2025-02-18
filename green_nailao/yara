@@ -1,0 +1,131 @@
+rule Windows_Ransomware_NailaoLoader_0 : malware {
+    meta:
+        description = "Shadowpad-associated locker ransomware's decryptor and launcher"
+        researcher = "Alexis BONNEFOI"
+        source = "OCD"
+        creation_date = "06/02/2025"
+        os = "Windows"
+        category = "Ransomware"
+        product = "p2a, mfd"
+        threat_name = "Windows.Ransomware.NailaoLoader"
+        samples = "5dc36e687a7fa3cfbf845e8a53173f37ac38559b6b87f9dcf609a72b3f284035,7b8ea6b1e2a29190cb28fc98ef837bf4a7a0b71b84177ce9395a5113a843c4d3,fcb8bf42d852526214578ab4b477b29f2412a7a931c6353db4fa6c221661edf4"
+    strings:
+        $asm_get_str_procs = {
+            E8 ?? ?? ?? 00
+            4? 8D 05 ?? ?? ?? 00
+            (B? 00 01 00 00|8B D?)
+            4? 8D (?4|?C) 24 ??
+            E8 ?? ?? ?? 00
+            4? 8D 05 ?? ?? ?? 00
+            (B? 00 01 00 00|8B D?)
+            4? 8D (?4|?C) 24 ??
+            E8 ?? ?? ?? 00
+            4? 8D 05 ?? ?? ?? 00
+            (B? 00 01 00 00|8B D?)
+            4? 8D (?4|?C) 24 ??
+            E8 ?? ?? ?? 00
+            4? 8D 05 ?? ?? ?? 00
+            (B? 00 01 00 00|8B D?)
+            4? 8D (?4|?C) 24 ??
+            E8 ?? ?? ?? 00
+            4? 8D 05 ?? ?? ?? 00
+            (B? 00 01 00 00|8B D?)
+            4? 8D (?4|?C) 24 ??
+        }
+        $asm_control_loader = { FF 15 ?? ?? ?? 00
+            48 8D 98 8F 00 01 00
+            80 ?B [0-2]
+            0F 85 ?? 00 00 00
+            80 7B ?1 ??
+            0F 85 ?? 00 00 00
+            80 7B ?2 ??
+            0F 85 ?? 00 00 00
+        }
+        $asm_unxor_paylaod ={           
+            (80 C?|0?) ?? [0-4]
+            (80 F?|3?) ?? [0-4]
+            (80 E?|2?) ?? [0-4]
+            88 (4? FF|0?) [0-12]
+            7? ??
+        }
+    condition:
+        2 of them and uint16(0) == 0x5A4D
+}
+
+
+
+
+rule Windows_Ransomware_NailaoLocker_1 : malware {
+    meta:
+        description = "Shadowpad-associated locker ransomware's in memory strings"
+        researcher = "Alexis BONNEFOI"
+        source = "OCD"
+        creation_date = "06/02/2025"
+        os = "Windows"
+        category = "Ransomware"
+        product = "p2a, mfd"
+        threat_name = "Windows.Ransomware.NailaoLocker"
+        samples = "2f95e360defa443d7a405ae657ebfd369da6834528d6e390a7aebe7a61592a44"
+    strings:
+        $str_1 = ".locked" ascii wide
+        $str_2 = "lock.log" ascii wide
+        $str_3 = "%ProgramData%\\lock.log" ascii wide
+        $str_4 = "W:\\" ascii wide
+        $str_5 = "locked.html" ascii wide
+        $str_6 = "Global\\lockv7"
+        $asm_free_orig_dll = {
+            4? B? ?? ?? 00 00 4? 8D (?4|?C) 24 ?? 4? 8B (C?|D?|E?|F?) FF 15 ?? ?? ?? 00 85 (C?|D?|E?|F?) 74 ?? 4? 8B (C?|D?|E?|F?) FF 15 ?? ?? ?? 00 4? 8B (C?|D?|E?|F?) FF 15 ?? ?? ?? 00 4? 8B (C?|D?|E?|F?) FF 15 ?? ?? ?? 00 4? 8D (?4|?C) 24 ?? FF 15 ?? ?? ?? 00 85(C?|D?|E?|F?)
+        }
+    condition:
+        $asm_free_orig_dll and 4 of ($str_*) and uint16(0) == 0x5A4D
+}
+
+
+ rule Windows_Trojan_Shadowpad : malware {
+    meta:
+        description = "Shadowpad injection"
+        researcher = "Alexis BONNEFOI"
+        source = "OCD"
+        creation_date = "06/02/2025"
+        os = "Windows"
+        category = "Trojan"
+        product = "p2a, mfd"
+        threat_name = "Windows.Trojan.Sidewalk"
+        samples = "0a749474b5f4a8537e50ea5b60d8c94f5c688fe414cd400c3397adca4315a509,697e6454d9be19f0bd60aeffa0238498a91d1ea5a23112f7c8f981afd2fedb23,c5f8a256d0969e253633160b9728b6c2bc044f536e92af178a05a598aaa09c1f"
+    strings:
+        $asm_control_loader = {
+            4? 83 EC ??
+            33 (C?|D?|E?|F?)
+            FF 15 ?? ?? ?? 00
+            4? 05 ?? ?? 00 00
+            8B (0?|1?|2?|3?)
+            81 F? 48 89 44 24
+            B? 00 00 00 00
+            4? 0F 45 (C?|D?|E?|F?)
+            4? 83 C4 ??
+            C3
+        }
+        $asm_shadowpad_main = {
+            4? 83 EC ??
+            E8 ?? ?? ?? FF
+            4? 8B 0D ?? ?? ?? 00
+            B? ?? ?? 00 00
+            (E8 ?? ?? ?? FF 4? 8D 0D ?? ?? ?? 00 4? 83 C4 ?? E9 ?? ?? ?? FF|4? 8? (C?|D?|E?|F?) ?? E9 ?? ?? ?? FF)           
+        }
+        $asm_replace_rsp = {
+            4? 8B (C?|D?|E?|F?)
+            4? 83 C? 08
+            4? 89 (?4|?C) 24 ??
+            4? 85 (C?|D?|E?|F?)
+            74 ??
+            4? 8B (0?|1?|2?|3?)
+            4? 8B (?4|?C) 24 ??
+            4? 3B (C?|D?|E?|F?)
+            75 ??
+            4? 8D 05 ?? ?? ?? FF
+            4? 89 (0?|1?|2?|3?)
+            EB??
+        }
+    condition:
+        2 of them and uint16(0) == 0x5A4D
+}
