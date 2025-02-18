@@ -1,0 +1,36 @@
+193.56.255.214	ShadowPad C2
+158.247.199.185	ShadowPad C2
+23.227.203.181	PlugX C2
+https://dscriy.chtq.net	ShadowPad C2
+
+104.238.135.232	Potential ShadowPad C2 
+139.84.137.63	Potential ShadowPad C2 
+141.164.35.65	Potential ShadowPad C2 
+176.222.55.131	Potential ShadowPad C2 
+193.56.255.214	Potential ShadowPad C2 
+37.120.239.33	Potential ShadowPad C2 
+45.76.209.205	Potential ShadowPad C2 
+45.77.153.108	Potential ShadowPad C2 
+45.77.170.188	Potential ShadowPad C2 
+47.242.0.122	Potential ShadowPad C2 
+52.194.253.134	Potential ShadowPad C2
+64.176.226.182	Potential ShadowPad C2
+64.176.59.232	Potential ShadowPad C2
+64.176.65.49	Potential ShadowPad C2
+8.210.30.189	Potential ShadowPad C2
+8.218.244.117	Potential ShadowPad C2
+
+c5f8a256d0969e253633160b9728b6c2bc044f536e92af178a05a598aaa09c1f	logexts.dll (ShadowPad loader)
+0a749474b5f4a8537e50ea5b60d8c94f5c688fe414cd400c3397adca4315a509	logexts.dll (ShadowPad loader)
+a2bb321d41b2300e80f9400950fa2125470d5b3927933ab4d6397f0cbf81532a	logexts.dll (ShadowPad loader)
+697e6454d9be19f0bd60aeffa0238498a91d1ea5a23112f7c8f981afd2fedb23	syncapp.dll (ShadowPad loader)
+de4bb30e400f081601d4091206ba6c04ac502f50e0dbac879db8c0202bff8108	Sensapi.dll (NailaoLoader)
+fcb8bf42d852526214578ab4b477b29f2412a7a931c6353db4fa6c221661edf4	Sensapi.dll (NailaoLoader)
+7b8ea6b1e2a29190cb28fc98ef837bf4a7a0b71b84177ce9395a5113a843c4d3	Sensapi.dll (NailaoLoader)
+5dc36e687a7fa3cfbf845e8a53173f37ac38559b6b87f9dcf609a72b3f284035	Sensapi.dll (NailaoLoader)
+7a0503da293da51a95aab0b1aa0970c8f82f04cb5149abe98fef934ba991064e	usysdiag.exe.dat (NailaoLocker)
+2b069dcde43b874441f66d8888dcf6c24b451d648c8c265dffb81c7dffafd667	usysdiag.exe.dat (NailaoLocker)
+27b313243daf145c9105f5372e01f1cea74c62697195c1a21c660be5f7ee788c	usysdiag.exe.dat (NailaoLocker)
+a2e937d0b9d5afa5b638cd511807e0fcb44ec81b354e2cf0c406f19e5564e54e	usysdiag.exe.dat (NailaoLocker)
+e3a669cbc8ed0cb2cf7b36d51fb747a4a5513806a3e7d0f2b866dbc07d78a690	Ransom Note
+89ce184854e230c4cdc49d4ddd79ca688fa515029f63bc90039c983610ffec44	Ransom Note
