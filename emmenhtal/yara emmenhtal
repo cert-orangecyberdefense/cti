@@ -1,0 +1,10 @@
+rule EmmenHTAl : malware {
+    strings:
+        $s1 = " = String.fromCharCode("
+        $s2 = ";var "
+        $s3 = "eval("
+        $s4 = "</script>"
+        $s5 = "<HTA:APPLICATION CAPTION = \"no\" WINDOWSTATE = \"minimize\" SHOWINTASKBAR = \"no\" >"
+    condition:
+        all of them
+}
