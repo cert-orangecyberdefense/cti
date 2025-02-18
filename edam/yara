@@ -1,0 +1,24 @@
+Yara Rule for Edam Dropper :
+
+    rule Windows_Trojan_EdamDropperDLL : malware {
+        meta:
+            description = "DLL that creates runkey, contacts bestone.php, download & exec payload"
+            researcher = "Alexandre MATOUSEK"
+            source = "OCD"
+            creation_date = "02/12/2024"
+            os = "Windows"
+            category = "Trojan"
+            threat_name = "Windows.Trojan.EdamDropperDLL"
+            samples = "244e004ac7149e2631d68cba947cfd3d5d5352536ecb352c410b6e80e09d874a, d4daf30ceee80c4f639f3aff6abeb95e7fbf11e125fb90f8972b7a92e22d22e5"
+        strings:
+            $persist1 = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" wide fullword
+            $persist2 = "Successfully added to startup:" wide fullword
+            $persist3 = "SettingsApp" wide
+            $persist4 = "SettingsAdd" wide
+            $exec = "Failed to call the DLL function." fullword
+            $net = "bestone.php"
+            $export = "DoUpdateInstanceEx"
+            $pdb = "C:\\Users\\user\\documents\\visual studio 2015" nocase
+        condition:
+            uint16(0) == 0x5A4D and 2 of ($persist*) and ($exec or $net or $export or $pdb)
+    }
