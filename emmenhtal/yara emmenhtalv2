@@ -1,0 +1,19 @@
+rule Windows_Trojan_Emmenhtalv2 : malware {
+    meta:
+        description = "Emmenhtal new version, data stage"
+        researcher = "Alexandre MATOUSEK"
+        source = "OCD"
+        creation_date = "18/12/2024"
+        os = "Windows"
+        category = "Trojan"
+        threat_name = "Windows.Trojan.Emmenhtal"
+    strings:
+        $ = "<script>window.moveTo(9999,0)</script>"
+        $ = "<script>window.onerror = function(){return true}</script>"
+        $ = " = document.documentElement.outerHTML;</script>"
+        $ = "<script>window.close()</script>"
+        $ = "<script>eval("
+        $ = ".replace(/(..)./g, function(match, p1) {return String.fromCharCode(parseInt(p1, 16))}))</script>"
+    condition:
+        all of them
+}
