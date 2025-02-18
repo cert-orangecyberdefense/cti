@@ -1,0 +1,64 @@
+#We share here 3 Yara rules related to Mintsloader prepared by our Reverse Engineering Team.
+#Dynamic analysis in our Malicious File Detection solution (https://www.orangecyberdefense.com/global/datasheets/malicious-file-detection) embed by default such rules.
+
+rule Window_Trojan_MintsLoader_0 : malware {
+    meta:
+        description = "MintsLoader JS malware"
+        researcher = "Alexis BONNEFOI"
+        source = "OCD"
+        creation_date = "15/10/2024"
+        os = "Windows"
+        category = "Trojan"
+        product = "p2a, mfd"
+        threat_name = "Windows.Trojan.MintsLoader"
+     
+    strings:
+        $a1 = /var arrayLength = array.length;\s*if\([0-9]{2,5} < 0 \|\| [0-9]{2,5} >= arrayLength\) \{\s*var [a-z]{1,} = 0;\s*\}/
+        $a2 = /function [a-z_]{1,}0[a-z_]{1,}\(/
+        $a3 = /var [A-Z][a-z]{1,} = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\+\/=';\s*var [A-Z][a-z]{1,} = '';\s*var [A-Z][a-z]{1,} = '';/
+        $a4 = /for \(var [A-Z][a-z]{1,} = [a-f0-9x+*\/ -]{1,50}, [a-z][A-Z][a-z]{1,}, [a-z][A-Z][a-z]{1,}, [a-z][A-Z][a-z]{1,} = [a-f0-9x+*\/ -]{1,50}; [a-z][A-Z][a-z]{1,} = [A-Z][a-z]{1,}\['charAt'\]\([a-z][A-Z][a-z]{1,}\+\+\);.{50,2000}\s*[a-z][A-Z][a-z]{1,} = [A-Z][a-z]{1,}\['indexOf'\]\([a-z][A-Z][a-z]{1,}\)/
+        $a5 = /var \S{1,} = \S{1,}\('[A-F0-9]{50,}'\);/
+        $a6 = /\/\/ ?([A-Za-z]{1,30} ?){5,30}/
+    condition:
+        #a5 > 1 and #a6 > 50 and all of them
+}
+
+
+rule Window_Trojan_MintsLoader_1 : malware {
+    meta:
+        description = "MintsLoader stage 2 payload, Powershell, payload until April 2024"
+        researcher = "Alexis BONNEFOI"
+        source = "OCD"
+        creation_date = "15/10/2024"
+        os = "Windows"
+        category = "Trojan"
+        product = "p2a, mfd"
+        threat_name = "Windows.Trojan.MintsLoader"
+        
+    strings:
+        $a1 = /\[Ref\]\.Assembly.GetType\((\$[a-z0-9]{1,20}\.){2}\$[a-z0-9]{1,20}\(\$\((\[char\]\([0-9]{1,4}[+*\/-][0-9]{1,4}\)\+){2,100}\[char\]\([0-9]{1,4}[+*\/-][0-9]{1,4}\)\)\)\)\.GetField\((\$[a-z0-9]{1,20}\.){2}\$[a-z0-9]{1,20}\(\$\((\[char\]\([0-9]{1,4}[+*\/-][0-9]{1,4}\)\+){2,100}\[char\]\([0-9]{1,4}[+*\/-][0-9]{1,4}\)\)\),(\$[a-z0-9]{1,20}\.){2}\$[a-z0-9]{1,20}\(\$\((\[char\]\([0-9]{1,4}[+*\/-][0-9]{1,4}\)\+){2,100}\[char\]\([0-9]{1,4}[+*\/-][0-9]{1,4}\)\)\)\)\.SetValue\(\$[a-z0-9]{1,20},\$true\);/
+        $a2 = /^set-alias [A-z0-9]{1,30} \$\((\[char\]\([0-9]{1,4}-[0-9]{1,4}\)\+?){9}\)\s*\$[A-z0-9]{1,20} = \$executioncontext/
+        $a3 = /\$[a-z0-9]{1,48} = \[System\.Text\.Encoding\]::ascii\s*function [a-z0-9]{1,48}\s*\{param\(\$[a-z0-9]{1,48}\s?\)\s*\$[a-z0-9]{1,48}\s?= \[System\.Convert\]::FromBase64String\(\$[a-z0-9]{1,48}\)\s+\$[a-z0-9]{1,48}\s?=\s?\$[a-z0-9]{1,48}\.GetBytes\("[a-z0-9]{1,48}"\)\s*\$[a-z0-9]{1,48}\s?=\s?\$[a-z0-9]{1,48}\s*\$[a-z0-9]{1,48}\s?=\s?\$\(for\s?\(\$[a-z0-9]{1,48}\s?=\s?0;\s?\$[a-z0-9]{1,48}\s-lt \$[a-z0-9]{1,48}\.length;\s?\)\s*\{\s*for\s?\(\$[a-z0-9]{1,48}\s?=\s?0;\s?\$[a-z0-9]{1,48}\s-lt \$[a-z0-9]{1,48}\.length;\s?\$[a-z0-9]{1,48}\+\+\s?\)\s?\{\s*\$[a-z0-9]{1,48}\[\$[a-z0-9]{1,48}] -bxor \$[a-z0-9]{1,48}\[\$[a-z0-9]{1,48}\]\s*\$[a-z0-9]{1,48}\+\+\s*if\s?\(\$[a-z0-9]{1,48} -ge \$[a-z0-9]{1,48}\.Length\)\s?\{\s*\$[a-z0-9]{1,48}\s?=\s?\$[a-z0-9]{1,48}\.length\s*\}\s*\}\s*}\)\s*\$[a-z0-9]{1,48}\s?=\s?New-Object System\.IO\.MemoryStream\(\s?,\s?\$[a-z0-9]{1,48}\s?\)\s*\$[a-z0-9]{1,48}\s?=\s?New-Object System\.IO\.MemoryStream\s*\$[a-z0-9]{1,48}\s?=\s?New-Object System\.IO\.Compression\.GzipStream \$[a-z0-9]{1,48}\s?,\s?\(\[IO\.Compression\.CompressionMode\]::Decompress\)\s*\$[a-z0-9]{1,48}\.CopyTo\(\s?\$[a-z0-9]{1,48}\s?\)\s*(\$[a-z0-9]{1,48}\.Close\(\)\s*){2}\[byte\[\]\]\s?\$[a-z0-9]{1,48}\s?=\s?\$[a-z0-9]{1,48}\s?\.ToArray\(\)\s*\$[a-z0-9]{1,48}\s?=\s?\$[a-z0-9]{1,48}\s*return\s?\$[a-z0-9]{1,48}\s*\}/ nocase
+    condition:
+        all of them
+}
+
+
+
+rule Window_Trojan_MintsLoader_2 : malware {
+    meta:
+        description = "MintsLoader stage 2 payload, Powershell, in memory payload since August 2024"
+        researcher = "Alexis BONNEFOI"
+        source = "OCD"
+        creation_date = "15/10/2024"
+        os = "Windows"
+        category = "Trojan"
+        product = "p2a, mfd"
+        threat_name = "Windows.Trojan.MintsLoader"
+        
+    strings:
+	$a1 = /\$[a-z]{1,48}='ur'\s?;new-alias press c\$\(\$[a-z]{1,48}\)l;\$[a-z]{1,48}=\(((0x)?[A-Fa-f0-9]{2,5},?){20,40}\);\$[a-z]{1,48}=\('bronx','get-cmdlet'\);\$[a-z]{1,48}=\$[a-z]{1,48};foreach\(\$[a-z]{1,48} in \$[a-z]{1,48}\)\{\$[a-z]{1,48}=\$[a-z]{1,48};\$[a-z]{1,48}=\$[a-z]{1,48}\+\[char\]\(\$[a-z]{1,48}-[0-9]{1,8}\);\$[a-z]{1,48}=\$[a-z]{1,48};\s*\$[a-z]{1,48}=\$[a-z]{1,48}\};\$[a-z]{1,48}\[(2|(0x)?[A-Fa-f0-9]{1,4}|[0-9]{1,8}\s?[+*\/%-]\s?[0-9]{1,8}\s?)\]\s?=\$[a-z]{1,48};\$[a-z]{1,48}='rl'\;\$[a-z]{1,48}=1\;\.\$\(\[char\]\((107|(0x)?[A-Fa-f0-9]{1,4}|(0x)?[A-Fa-f0-9]{1,8}\s?[+*\/%-]\s?(0x)?[A-Fa-f0-9]{1,8}\s?)\)\+'e'\+'x'\)\(press\s*-useb\s*\$[a-z]{1,48}\)\s*/
+        $a2 = /\$[a-z]{1,48}='ur'\s?;new-alias press c\$\(\$[a-z]{1,48}\)l;\$[a-z]{1,48}=\(([0-9]{2,5},?){20,40}\);\$[a-z]{1,48}=\('bronx','get-cmdlet'\);\$[a-z]{1,48}=\$[a-z]{1,48};foreach\(\$[a-z]{1,48} in \$[a-z]{1,48}\)\{\$[a-z]{1,48}=\$[a-z]{1,48};\$[a-z]{1,48}=\$[a-z]{1,48}\+\[char\]\(\$[a-z]{1,48}-[0-9]{1,8}\);\$[a-z]{1,48}=\$[a-z]{1,48};\s*\$[a-z]{1,48}=\$[a-z]{1,48}\};\$[a-z]{1,48}\[2\]=\$[a-z]{1,48};\$[a-z]{1,48}='rl'\;\$[a-z]{1,48}=1\;\.\$\(\[char\]\(9992-9887\)\+'e'\+'x'\)\(press\s*-useb\s*\$[a-z]{1,48}\)\s*/
+    condition:
+        any of them
+}
