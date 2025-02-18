@@ -1,0 +1,10 @@
+Executive Summary
+
+Affiliate marketing is a marketing strategy in which businesses reward affiliates for driving traffic or sales to their website. While being a legitimate and widely used marketing technique to boost traffic and sales for a product or service, affiliate marketing is also used in numerous malicious schemes promoting sweepstakes, home improvement services, casinos, or dating sites.
+Hundreds of small affiliate networks promote primarily dubious affiliation offers that lead to well-known scams.
+Affiliates are specialists in traffic generation and use their skills to distribute various types of content, ranging from legal advertising to direct malware distribution.
+The World Watch team has identified a previously undocumented Traffic Distribution System (TDS) linked to affiliate marketing being used in scams that impacted around 110 million of Internet users. We have named it R0bl0ch0n TDS based on specific patterns in the URL redirections: "0/0/0".
+This TDS infrastructure consists of numerous domains and dedicated servers protected behind Cloudflare. Even if the threat actor includes legitimate features such as unsubscribe and contact forms, steps are taken to hide the real entity behind these campaigns.
+IOCs can be found on our GitHub page.
+
+Note: The analysis cut-off date for this report was end of May, 2024
