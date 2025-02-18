@@ -1,0 +1,28 @@
+title: Suspicious .lnk file download using WebDav
+id: ec349ed0-ae61-4065-a7c7-54ed9bd022cb
+status: stable
+description: |
+    Detects suspicious .lnk file download using WebDav.
+    This could be an indicator of use of WebDav to download and execute remote lnk files as observed during Emmenhtal infection.
+references:
+    - https://www.orangecyberdefense.com/global/blog/cert-news/emmenhtal-a-little-known-loader-distributing-commodity-infostealers-worldwide
+    - https://github.com/SigmaHQ/sigma/blob/master/rules/web/proxy_generic/proxy_downloadcradle_webdav.yml
+author: Orange Cyberdefense - Roland ROURE
+date: 2024/08/08
+tags:
+    - attack.execution
+    - attack.command_and_control
+    - attack.t1071.001
+    - attack.t1105
+    - tlp.white
+logsource:
+    category: proxy
+detection:
+    selection:
+        cs-method: 'GET'
+        c-useragent|contains: 'Microsoft-WebDAV-MiniRedir/'
+        c-uri-stem|endswith: '.lnk'
+    condition: selection
+falsepositives:
+    - Unknown
+level: high
