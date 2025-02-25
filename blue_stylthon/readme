@@ -1,4 +1,21 @@
+Executive Summary:
+
 In December 2024, one of our Managed Threat Detection (CyberSOC) client was impacted by a malicious multistage campaign leveraging WsgiDAV servers to distribute XWorm and AsyncRAT, two notorious commodity malware.
 We assess this specific campaign is ongoing since at least early November 2024 and targets France and Germany. Nevertheless, it aligns with a larger cluster previously detailed by Proofpoint, Fortinet or Forcepoint researchers which may have surfaced around February 2024. We currently track this cluster under the “cheesy” name Blue Stylthon.
 The infection chain leveraged a phishing email as initial access vector, likely containing an attachement masquerading as an invoice. We then observed the following execution sequence: LNK > VBS > BAT > Powershell > ZIP > Python > AsyncRAT/XWorm.
 In addition to WsgiDAV (generic and extendable WebDAV server written in Python and based on WSGI) servers , the campaign also relied on TryCloudflare tunnels used to retrieve intermediary payloads (notably LNK and BAT files) as well as open-source tools used to obfuscate and load the stages (namely Kramer and Donut).
+
+
+Analysis
+
+Last December 2024, our World Watch team investigated a compromise involving numerous stages ultimately leading to AsyncRAT and XWorm. 
+The infection involved an HTML file attachment masquerading as an invoice which queries a shortcut (LNK file) using "search-ms", which then leads to a VBS file. The VBS file uses the Windows Scripting Host (WSH) to create a shell object. It then executes a command using ‘cmd.exe‘ to reach a remote batch file located on a WsgiDAV server. The BAT file opens a decoy PDF and downloads a ZIP archive via PowerShell.
+
+Upon analysis, these archives contained a Python interpreter as well as three additional Python payloads. All three files are obfuscated using an open source tool called Kramer, which encrypts code using an addition operation with a randomly generated key. After retrieving the decryption key, we were able to observe each Python file executing a shellcode, likely generated using another open source tool called Donut. 
+The three shellcodes act as loaders for final stages belonging to AsyncRAT and XWorm families, identified using this extractor provided by Volexity. These two strains are notorious commodity malware which have been distributed in a large diversity of campaigns over the last years, as highlighted in our dedicated World Watch advisory.
+
+By pivoting on the different stages (especially the BAT and LNK files), we identified many similar infections chains with slight variations (no intermediary VBS file, other final stage malware) and were able to tie our observations to previous reports from Proofpoint, Fortinet, eSentire and Forcepoint. In all cases, attackers' use of Python scripts for malware delivery is notable. The packaging of a Python library or installer alongside the malicious Python scripts ensures the malware can be downloaded and run on hosts that do not have Python installed already.
+
+In terms of infrastructure, we observed the threat actors continue to leverage TryCloudflare tunnels, which consist of subdomains automatically generated with 4 random words on trycloudflare[.]com. As we previously explained in our initial advisory, this proxy technique is very popular among threat actors since 2023, and enables the creation of Internet-accessible servers proxified through Cloudflare's infrastructure.
+
+Besides these tunnels, the Blue Stylthon cluster relies on WsgiDAV servers to host intermediary payloads. WsgiDAV are generic and extendable WebDAV servers written in Python and based on WSGI (Web Server Gateway Interface), which provide easy remote access and file manipulation. Many of these servers related to this campaign used domain names with .shopTLD (and to a lesser extent .click or .one). Many of these servers are hosted within the same AS (AS 215240, belonging to a UK-based provider called Silent Connection Ltd).
