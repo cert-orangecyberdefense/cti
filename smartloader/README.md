@@ -1,4 +1,4 @@
-Following a recent TrendMicro [investigation](https://www.trendmicro.com/en_us/research/25/c/ai-assisted-fake-github-repositories.html), we have found many GitHub repositories actively delivering SmartLoader. SmartLoader is Lua-written loader distributed since early 2024.
+Following a recent TrendMicro [investigation](https://www.trendmicro.com/en_us/research/25/c/ai-assisted-fake-github-repositories.html), we have found many GitHub repositories actively delivering SmartLoader. SmartLoader is Lua-written loader distributed since mid 2023.
 
 In recent campaigns, threat actors have been creating new GitHub repositories populated with an AI generated README and filled with fake backdated commits. We have also observed the same payloads being distributed via inactive repositories. These repositories are typically forked, with a new release containing SmartLoader ultimately added.
 
