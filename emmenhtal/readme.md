@@ -18,9 +18,9 @@ Emmenhtalv2 has been mainly distributed through fake CAPTCHAs and “ClickFix”
 
 Emmenhtal v3
 
-Emmenhtal v3 surfaced in early March 2025, with many changes added to the HTA, JS and last Powershell stages.
+Emmenhtal v3 surfaced in early March 2025, with many changes added to the HTA, JS and last Powershell stages, including new mouse movements speed check.
 
 Current infection chains seem to leverage either fake CAPTCHAs verification on a compromised or malicious website leading to .mp4 files, or trojanized .mp3 files masquerading as songs and likely downloaded from file sharing platform MediaFire.
-Most of these chains includes a new intermediary stage (a Powershell with AMSI bypass feature which loads a .NET stage) in charge of delivering stealers.
+Most of these chains includes a new intermediary stage (a Powershell with AMSI bypass feature which loads in memory a .NET stage) in charge of delivering stealers.
 
 
