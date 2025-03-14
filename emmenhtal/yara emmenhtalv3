@@ -1,0 +1,23 @@
+ rule Windows_Trojan_Emmenhtal_3 : malware {
+    meta:
+        description = "Emmenhtal v3, March 2025 version"
+        researcher = "Alexandre MATOUSEK"
+        source = "OCD"
+        creation_date = "09/03/2025"
+        os = "Windows"
+        category = "Trojan"
+        product = "p2a, mfd"
+        threat_name = "Windows.Trojan.Emmenhtal"
+        samples = "None"
+    strings:
+        $ = "<script>window.moveTo("
+        $ = "<script>window.onerror = function(){return true}</script>"
+        $ = /= '[0-9A-Fa-f]{2}[a-zA-Z]{1}([0-9A-Fa-f]{2}[a-zA-Z]{1}){99,}/
+        $ = "<script>window.close()</script>"
+        $ = "<script>eval("
+        $ = ".replace(/(..)./g, function(match, p1) {return String.fromCharCode(parseInt(p1, 16))}))</script>"
+    condition:
+        all of them
+}
+ 
+ 
