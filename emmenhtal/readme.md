@@ -1,7 +1,10 @@
 Emmenhtal is a malicious loader likely distributed since early 2024, and first publicly detailed by Orange Cyberdefense CERT in August 2024.
 Emmenhtal is an obfuscated multistage payload that spawns an execution of the LOLBIN mshta.exe to read a first HTA stage that embeds a malicious JavaScript code. Once interpreted and executed, the JavaScript decodes and runs a PowerShell script. The latter decrypts an obfuscated PowerShell loader which finally downloads and runs final-stage stealers and commodity RATs.
 
-As of March 2025, our CERT has been tracking three versions of the loader, all actively distributed.
+Blogpost URL: https://www.orangecyberdefense.com/no/blog/cert-news/emmenhtal-a-little-known-loader-distributing-commodity-infostealers-worldwide
+World Watch advisory (for our clients): https://portal.cert.orangecyberdefense.com/worldwatch/advisory/1778
+
+As of March 2025, our CERT has identified three versions of the loader, all actively distributed.
 
 Emmenhtal v1
 
