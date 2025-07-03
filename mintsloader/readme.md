@@ -8,3 +8,4 @@ Additional information on this threat is available for our World Watch customers
 
 IOCs and Yara rules are available in this repository.
 
+🔗 [Update July 4, 2025](https://github.com/cert-orangecyberdefense/cti/blob/main/mintsloader/2025-07-04-IoCs.md)
