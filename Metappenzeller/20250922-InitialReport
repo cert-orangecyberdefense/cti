@@ -1,0 +1,20 @@
+
+# IoCs
+
+
+| IoCs                                                             | Comment                                    |
+| ---------------------------------------------------------------- | ------------------------------------------ |
+| bestsaleshoppingdaydeals.com                                     | C2 Domain                                  |
+| bestsaleshoppingday.com                                          | C2 Domain                                  |
+| https://goo[.]su/I23iS                                           | Email URL                                  |
+| https://goo[.]su/TnTSt/                                          | Email URL                                  |
+| https://goo[.]su/dFj632j                                         | Email URL                                  |
+| 4d30c089bb8421342ec19ee146b73a251985146b0be7d4412a77c81c388ad802 | Main archive (`AppSheet_Legal_Notice.zip`) |
+| 787c26ef662b20d8a6daea187a6cad9401af5d6f84ad77f4fb24fdae6f37e92f | Malicious DLL (`AppvIsvSubsystems64.dll`)  |
+| https://namchask[.]online/appsheet/                              | Delivery URL                               |
+| 9679bee0656e                                                     | Mutex created                              |
+|                                                                  |                                            |
+
+
+
+
