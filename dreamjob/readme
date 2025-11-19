@@ -1,0 +1,11 @@
+A Pain in the Mist - Navigating Operation DreamJob’s arsenal
+
+•	In August 2025, Orange Cyberdefense’s CyberSOC and CSIRT investigated an intrusion targeting an Asian subsidiary of a large European manufacturing organization.
+•	The infection chain was initiated by social engineering and a targeted WhatsApp message containing a job-related lure sent to a project engineer.
+•	The intrusion leveraged variants of the BURNBOOK loader and the MISTPEN backdoor as well as compromised SharePoint and WordPress resources for C2 infrastructure.
+•	We assess that this attack coincides with the longstanding Operation DreamJob. We also attribute the attacks artifacts with medium confidence to UNC2970.
+
+The full PDF report aims to describe the infection chain we observed, and to provide a comparative analysis of the BURNBOOK and MISTPEN variants encountered. Recommendations and hunting guidance are also provided in the concluding section.
+Note: The analysis cut-off date for this report was November 17, 2025.
+
+Link to the full report:
