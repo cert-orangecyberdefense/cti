@@ -1,0 +1,18 @@
+Between September and December 2025, ValleyRAT (aka Winos 4.0) has been detected in several cases by our Managed Threat Detection teams, mostly affecting China-based entities of French, German, and Swedish customers.
+These ValleyRAT infections systematically stemmed from users downloading software installers from malicious websites boosted by SEO poisoning. These EXE or MSI files typically contain a legitimate installer for a popular software, as well as malicious DLLs designed to ultimately execute ValleyRAT.
+
+**Example of an infection chain observed by our Managed Threat Detection team**
+Fake Google Translate page, displaying a "Plugin error" message pop-up. 
+When the victim clicked on the page, a ZIP file was downloaded, containing an MSI, stusp插件.msi, which sideloads a DLL called EnumW.dll. This DLL immediately performs environment validation to confirm its execution by msiexec.exe; any deviation is treated as an automated analysis attempt such as a sandbox detonation, and causes early termination. EnumW.dll then applies further multi-layered sandbox and virtualization evasion. It validates sleep integrity by issuing two HTTP QUERY_DATE requests to www.baidu.com using the custom user-agent B-Agent, five seconds apart.
+
+The DLL then reconstructs and loads a second malicious DLL called Amazing_Cultivation_SimulatorBase.dll through cmo01.exe. This DLL creates several files in the AppData folder, including a shellcode stored in the MyData registry value and a malicious executable waitfor.exe. The threat actors then established persistence by creating a malicious shortcut file, GooglUpdata.lnk in C:\ProgramData\Venlnk, which points to waitfor.exe. The shellcode retrieves a final payload, which is directly injected into memory and establishes C2 communications. Interestingly, both observed DLLs use invalid signatures from Chinese software publishers Zhuhai Kingsoft Office Software Co., Ltd. and Shanghai Lilith Network Technology Co., Ltd.
+
+The final payload in question is ValleyRAT's core module, which maintains persistence, steals data, and loads additional modules received from the C2. A Fortinet report from September 2025 also covered a similar ValleyRAT infection chain.
+
+    Lure websites infrastructure: particularly fake Google Translate pages. By pivoting on the content of these lures, we observed multiple types of domains. Some of this infrastructure is based on a Domain Generation Algorithm (DGA), typically with a .top TLD, and registered through Gname[.]com Pte. Ltd., such asccf3[.]yitian1[.]top. Others are domains typosquatting Google, Chrome or Google Translate with more varied  .com, .icu, and  .xyz TLDs, like translatzqtacouioa2[.]com. These websites have also been observed displaying alternative lures impesonating WPS (an Office suite by Chinese vendor Kingsoft, widely used in Asia with 600 million users), VPN providers, and Telegram installers, or redirecting users to intermediate landing pages.
+    Payload download websites: when the victim clicks on the pages, it launches the download of a ZIP archive, often from servers hosted by AWS or Alibaba Cloud.
+    C2 infrastructure:Use of IP addresses typically provided by Hong Kong-based hosters, in particular AS152194 and AS4907. In several cases, the C2 communications are made through port 5689.
+
+
+
+
