@@ -1,0 +1,24 @@
+Orange Cyberdefense CERT is observing since early 2026 an ongoing malvertising campaign leading to ScreenConnect RMM. 
+We track this cluster as Cancoillotte.
+Delivery infrastructure consist of domains spoofing:
+- AntiMicroX
+- Bandicam
+- CPU-Z
+- CrystalDiskMark
+- Defender Control
+- DNS Jumper
+- DS4Windows
+- Ferdium
+- GOM Player
+- mGBA
+- Process Hacker
+- SteamTools
+- tModLoader
+Such domains are often hosted on 2[.]59.134.97 (ASN 58212 - Dataforest Gmbh)
+Clicking on "Download" fetches a ZIP archive containing a ScreenConnect binary, from direct-download.giize[.]com.
+Most of the ScreenConnect C2 we observed are hosted on ASN 58212 as well:
+185[.]254.97.249
+176[.]96.137.225
+
+
+                                   
