@@ -28,6 +28,20 @@ Notably, credential theft is only activated after successful C2 interaction.
 6/ Bottom line: different lures, similar staging, same malware outcome.
 
 7/ We published a full advisory for our customers on the infection chain, overlaps, and malware analysis. Related IoCs are also available in this public GitHub repository.
- 
 
+
+Sources:
+
+eSentire: https://www.esentire.com/blog/stx-rat-a-new-rat-in-2026-with-infostealer-capabilities
+
+Alyac: https://blog.alyac.co.kr/5738
+
+
+Other STX RAT campaigns: 
+
+CPUID: https://x.com/d0cTB/status/2042520961824559150
+
+Kaspersky: https://securelist.com/tr/cpu-z/119365/
+
+ 
  
