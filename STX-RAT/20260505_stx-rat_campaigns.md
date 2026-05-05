@@ -3,6 +3,8 @@ Our investigation identified overlaps across these campaigns, and related sample
 
 #CTI #ThreatIntel #STXRAT
 
+![Campaigns delivering STX RAT](https://world-watch-images.s3.gra.io.cloud.ovh.net/2026/05/stx_watermarked_compressed.png)
+
 1/ Our investigation started from the publicly documented FileZilla campaign, which used a fake FileZilla website to distribute trojanized FileZilla 3.69.5 packages.
 The campaign used two delivery variants:
 a portable archive containing the legitimate FileZilla package plus a malicious version.dll
@@ -27,4 +29,5 @@ Notably, credential theft is only activated after successful C2 interaction.
 
 7/ We published a full advisory for our customers on the infection chain, overlaps, and malware analysis. Related IoCs are also available in this public GitHub repository.
  
+
  
