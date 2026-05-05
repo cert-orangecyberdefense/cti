@@ -36,6 +36,9 @@ eSentire: https://www.esentire.com/blog/stx-rat-a-new-rat-in-2026-with-infosteal
 
 Alyac: https://blog.alyac.co.kr/5738
 
+Jerome Segura: https://jeromesegura.com/malvertising/2026/01/01-20-2026_LibreOffice
+
+
 
 Other STX RAT campaigns: 
 
