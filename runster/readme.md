@@ -8,7 +8,7 @@
 
 ---
 
-Orange Cyberdefense has been tracking a previously unnamed modular stealer-loader framework we call **Runster**, active since at least November 2025. Two main delivery methods. Two PowerShell modules stealing data. A third, related executable with a DGA component dropping a full-featured DLL.
+Orange Cyberdefense CERT has been tracking a previously unnamed modular stealer-loader framework we call **Runster**, active since at least November 2025. Two main delivery methods. Two PowerShell modules stealing data. A third, related executable with a DGA component dropping a full-featured DLL.
 
 ![RUNSTER attack chain](runster_attack_chain.png)
 *RUNSTER delivery and modular architecture — Orange Cyberdefense*
