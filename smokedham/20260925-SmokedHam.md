@@ -1,4 +1,4 @@
-🧶Our CyberSOC team has observed malicious ads leading to fake RDC Manual or RVtools training websites. These sites deliver fake installers that deliver various payloads, including **SmokedHam/UNC2465**.
+🧶Our CyberSOC team has observed malicious ads leading to fake RDC Manager or RVtools training websites. These sites deliver fake installers that lead to various payloads, including **SmokedHam/UNC2465**.
 
 🔗 Other payloads using the same signer, SAN SOFTWARE, TOO, have also been documented recently but not formally tied to this cluster:
 
